@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { forbiddenNameValidator } from './shared/username.validator';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,12 @@ export class AppComponent {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  get userName(){
+  get userName() {
     return this.registrationForm.get('userName');
   }
 
   registrationForm = this.formBuilder.group({
-    userName: ['Richie', [Validators.required, Validators.minLength(3)]],
+    userName: ['Richie', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/admin/)]],
     password: [''],
     confirmPassword: [''],
     address: this.formBuilder.group({
